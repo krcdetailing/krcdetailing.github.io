@@ -317,6 +317,43 @@
     font-size:1.3rem;
     color:var(--brass-soft);
   }
+  .price .was{
+    text-decoration:line-through;
+    color:var(--ink-dim);
+    font-size:1rem;
+    margin-right:0.6em;
+    font-weight:400;
+  }
+  .price .now{
+    color:var(--brass-soft);
+  }
+  .price-badge{
+    display:inline-block;
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.68rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--bg);
+    background:var(--brass-soft);
+    padding:0.25em 0.6em;
+    margin-left:0.6em;
+    border-radius:2px;
+    vertical-align:middle;
+  }
+  .service-card.coming-soon{
+    opacity:0.55;
+    filter:grayscale(0.4);
+  }
+  .soon-badge{
+    display:inline-block;
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--ink-dim);
+    border:1px solid var(--hair);
+    padding:0.4em 0.9em;
+  }
 
   /* ---------- PROCESS ---------- */
   .process{
@@ -488,46 +525,46 @@
       <div class="section-head reveal">
         <div>
           <p class="eyebrow">Diensten</p>
-          <h2>Drie niveaus van precisie.</h2>
+          <h2>Van basic wash tot volledige correctie.</h2>
         </div>
-        <p>Van een grondige onderhoudsbeurt tot volledige paint correction met keramische afwerking — elk pakket wordt op de auto zelf afgestemd, niet op een vaste checklist.</p>
+        <p>Van een snelle, grondige wasbeurt tot volledige paint correction met keramische afwerking — elk pakket wordt afgestemd op wat jouw auto nodig heeft.</p>
       </div>
 
       <div class="services reveal">
         <div class="service-card">
           <span class="idx">01 — ONDERHOUD</span>
-          <h3>Signature Wash</h3>
-          <p>Handmatige tweefasen-was, velgenreiniging en interieur detailing voor auto's die er verzorgd bij moeten blijven.</p>
+          <h3>Basic Wash</h3>
+          <p>Snelle en grondige binnen- en buitenreiniging, ideaal voor auto's die er weer fris en verzorgd bij moeten staan.</p>
           <ul class="service-specs">
-            <li>Contactloze voorwas</li>
-            <li>pH-neutrale shampoo</li>
-            <li>Interieur stofzuigen &amp; leerverzorging</li>
+            <li>Exterieur handwas</li>
+            <li>Velgen reinigen</li>
+            <li>Interieur stofzuigen &amp; opfrissen</li>
           </ul>
-          <div class="price">Vanaf € 129</div>
+          <div class="price"><span class="was">€ 60</span><span class="now">€ 45</span><span class="price-badge">Introductieprijs</span></div>
         </div>
 
         <div class="service-card">
-          <span class="idx">02 — CORRECTIE</span>
-          <h3>Paint Correction</h3>
-          <p>Machinale polijstbeurt die swirls, waslicht-krassen en oxidatie verwijdert en de lak terugbrengt naar spiegelglans.</p>
+          <span class="idx">02 — BESCHERMING</span>
+          <h3>Protection Wash</h3>
+          <p>Complete was met waxbescherming, hydrofobe ruitbehandeling en een grondige interieurreiniging voor auto's die net dat stapje extra verdienen.</p>
+          <ul class="service-specs">
+            <li>Wasbeurt met waxlaag</li>
+            <li>Hydrofobe ruitbehandeling (water blijft niet plakken)</li>
+            <li>Matten &amp; interieur grondig gereinigd</li>
+          </ul>
+          <div class="price"><span class="now">€ 80</span></div>
+        </div>
+
+        <div class="service-card coming-soon">
+          <span class="idx">03 — CORRECTIE &amp; BESCHERMING</span>
+          <h3>Paint Correction + Ceramic Shield</h3>
+          <p>Machinale polijstbeurt die swirls, waslicht-krassen en oxidatie verwijdert, afgewerkt met een keramische coating voor jarenlange bescherming en een diepe glans.</p>
           <ul class="service-specs">
             <li>Lakdiktemeting vooraf</li>
             <li>Meerfasen polijstproces</li>
-            <li>Fotoverslag voor &amp; na</li>
+            <li>Keramische coating (9H)</li>
           </ul>
-          <div class="price">Vanaf € 449</div>
-        </div>
-
-        <div class="service-card">
-          <span class="idx">03 — BESCHERMING</span>
-          <h3>Ceramic Shield</h3>
-          <p>Keramische coating die de lak jarenlang beschermt tegen UV, chemicaliën en vuil, met een diepe, natte glans.</p>
-          <ul class="service-specs">
-            <li>Inclusief paint correction</li>
-            <li>9H keramische laag</li>
-            <li>Onderhoudsplan inbegrepen</li>
-          </ul>
-          <div class="price">Vanaf € 899</div>
+          <div class="price"><span class="soon-badge">Binnenkort beschikbaar</span></div>
         </div>
       </div>
     </div>
@@ -540,29 +577,29 @@
           <p class="eyebrow">Werkwijze</p>
           <h2>Vier stappen, geen omwegen.</h2>
         </div>
-        <p>Structuur zonder de studio in een fabriek te veranderen — elke stap bepaalt wat de volgende nodig heeft.</p>
+        <p>Duidelijk en overzichtelijk — je weet vooraf precies wat je kan verwachten.</p>
       </div>
 
       <div class="process reveal">
         <div class="step">
           <div class="num">01</div>
-          <h3>Inspectie</h3>
-          <p>Lakdiktemeting en een rondje met de klant om doel en verwachting scherp te krijgen.</p>
+          <h3>Aanvraag</h3>
+          <p>Je neemt contact op en vertelt kort wat je wensen zijn en welke auto het betreft.</p>
         </div>
         <div class="step">
           <div class="num">02</div>
-          <h3>Voorbereiding</h3>
-          <p>Decontaminatie van lak en velgen, klei-behandeling en afplakken van kwetsbare delen.</p>
+          <h3>Inplannen</h3>
+          <p>Samen plannen we een moment dat jou uitkomt, bij mijn werkplaats.</p>
         </div>
         <div class="step">
           <div class="num">03</div>
           <h3>Behandeling</h3>
-          <p>Polijsten, coaten of reinigen — uitgevoerd in fasen, met controle na elke stap.</p>
+          <p>Was, bescherming en/of interieurreiniging worden zorgvuldig uitgevoerd.</p>
         </div>
         <div class="step">
           <div class="num">04</div>
-          <h3>Oplevering</h3>
-          <p>Eindinspectie bij daglicht, fotoverslag en een kort onderhoudsadvies voor thuis.</p>
+          <h3>Klaar voor gebruik</h3>
+          <p>Een laatste check samen met jou, en je auto is weer helemaal fris en verzorgd.</p>
         </div>
       </div>
     </div>
@@ -570,8 +607,8 @@
 
   <div class="quote-section">
     <div class="wrap" style="padding:80px 0;">
-      <blockquote class="reveal">"Ik heb auto's laten wassen. Bij KRC laat ik ze restaureren — dat is een ander vak."</blockquote>
-      <p class="quote-by">— R. van Dijk, klant sinds 2022</p>
+      <blockquote class="reveal">Voor mij is detailing geen klusje, het is vakmanschap. Ik neem de tijd om het goed te doen — want jouw auto verdient meer dan een wasstraat.</blockquote>
+      <p class="quote-by">KRC Detailing</p>
     </div>
   </div>
 
@@ -582,12 +619,6 @@
         <h2>Plan een afspraak.</h2>
         <p>Stuur merk, model en bouwjaar mee — dan komen we voorbereid en kunnen we ter plekke een realistische inschatting geven.</p>
 
-        <ul class="info-list">
-          <li><span>Adres</span><span>Industrieweg 12, Utrecht</span></li>
-          <li><span>Telefoon</span><span>030 – 123 4567</span></li>
-          <li><span>E-mail</span><span>info@krcdetailing.nl</span></li>
-          <li><span>Openingstijden</span><span>Di–Za, 09:00–18:00</span></li>
-        </ul>
       </div>
 
       <form class="reveal" onsubmit="event.preventDefault(); this.querySelector('.btn').textContent='Verzonden ✓';">
