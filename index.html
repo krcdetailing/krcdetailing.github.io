@@ -470,11 +470,102 @@
     .services, .process, .trust-grid{grid-template-columns:1fr;}
     .field{flex-direction:column; gap:0.3em;}
     .field label{width:auto;}
+  /* ---------- COMING SOON OVERLAY ---------- */
+  .cs-overlay{
+    position:fixed;
+    inset:0;
+    z-index:200;
+    background:var(--bg);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:24px;
+  }
+  .cs-overlay::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+      radial-gradient(ellipse 900px 500px at 82% 0%, rgba(37,67,107,0.55), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 10% 100%, rgba(79,159,224,0.12), transparent 60%);
+    pointer-events:none;
+  }
+  .cs-content{
+    position:relative;
+    max-width:560px;
+  }
+  .cs-content img{
+    height:64px;
+    width:auto;
+    margin:0 auto 2rem;
+  }
+  .cs-content h1{
+    font-size:clamp(2.2rem, 5vw, 3.2rem);
+    line-height:1.1;
+    margin-bottom:1.2rem;
+  }
+  .cs-content h1 em{
+    font-style:italic;
+    color:var(--brass-soft);
+  }
+  .cs-content p{
+    color:var(--ink-dim);
+    font-size:1.05rem;
+    margin:0 0 2.2rem;
+  }
+  body.cs-locked{overflow:hidden;}
+  .cs-hidden{display:none !important;}
+
+  /* ---------- WATERMARK RIBBON ---------- */
+  .watermark-ribbon{
+    position:fixed;
+    top:42%;
+    left:-15%;
+    width:130%;
+    transform:rotate(-8deg);
+    background:rgba(79,159,224,0.14);
+    border-top:1px solid rgba(143,199,239,0.35);
+    border-bottom:1px solid rgba(143,199,239,0.35);
+    overflow:hidden;
+    z-index:150;
+    pointer-events:none;
+    white-space:nowrap;
+    backdrop-filter:blur(1px);
+  }
+  .watermark-track{
+    display:inline-block;
+    white-space:nowrap;
+    animation:ribbon-scroll 16s linear infinite;
+    font-family:'JetBrains Mono', monospace;
+    font-size:clamp(0.9rem, 2vw, 1.3rem);
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    color:var(--ink);
+    padding:0.7em 0;
+  }
+  @keyframes ribbon-scroll{
+    from{transform:translateX(0);}
+    to{transform:translateX(-50%);}
   }
 </style>
 </head>
-<body>
+<body class="cs-locked">
 
+<div class="watermark-ribbon">
+  <div class="watermark-track">HOU ONS IN DE GATEN &nbsp;—&nbsp; COMING SOON &nbsp;—&nbsp; HOU ONS IN DE GATEN &nbsp;—&nbsp; COMING SOON &nbsp;—&nbsp; HOU ONS IN DE GATEN &nbsp;—&nbsp; COMING SOON &nbsp;—&nbsp; </div>
+</div>
+<div class="cs-overlay" id="csOverlay">
+  <div class="cs-content">
+    <img src="krc-logo.png" alt="KRC Detailing">
+    <p class="eyebrow" style="justify-content:center;">KRC Detailing</p>
+    <h1>Hou ons <em>in de gaten</em>.</h1>
+    <p>Binnenkort gaat KRC Detailing van start. Mis het niet.</p>
+    <button class="btn" id="csEnter">Bekijk de website</button>
+  </div>
+</div>
+
+<div id="siteContent">
 <header id="top">
   <div class="nav">
     <a href="#" class="logo"><img src="krc-logo.png" alt="KRC Detailing — Premium Car Detailing"></a>
@@ -531,7 +622,7 @@
       </div>
 
       <div class="services reveal">
-        <div class="service-card">
+        <div class="service-card coming-soon">
           <span class="idx">01 — ONDERHOUD</span>
           <h3>Basic Wash</h3>
           <p>Snelle en grondige binnen- en buitenreiniging, ideaal voor auto's die er weer fris en verzorgd bij moeten staan.</p>
@@ -540,10 +631,10 @@
             <li>Velgen reinigen</li>
             <li>Interieur stofzuigen &amp; opfrissen</li>
           </ul>
-          <div class="price"><span class="was">€ 60</span><span class="now">€ 45</span><span class="price-badge">Introductieprijs</span></div>
+          <div class="price"><span class="soon-badge">Binnenkort beschikbaar</span></div>
         </div>
 
-        <div class="service-card">
+        <div class="service-card coming-soon">
           <span class="idx">02 — BESCHERMING</span>
           <h3>Protection Wash</h3>
           <p>Complete was met waxbescherming, hydrofobe ruitbehandeling en een grondige interieurreiniging voor auto's die net dat stapje extra verdienen.</p>
@@ -552,7 +643,7 @@
             <li>Hydrofobe ruitbehandeling (water blijft niet plakken)</li>
             <li>Matten &amp; interieur grondig gereinigd</li>
           </ul>
-          <div class="price"><span class="now">€ 80</span></div>
+          <div class="price"><span class="soon-badge">Binnenkort beschikbaar</span></div>
         </div>
 
         <div class="service-card coming-soon">
@@ -655,7 +746,15 @@
   </div>
 </footer>
 
+</div>
+
 <script>
+  // Coming soon overlay
+  document.getElementById('csEnter').addEventListener('click', function(){
+    document.getElementById('csOverlay').classList.add('cs-hidden');
+    document.body.classList.remove('cs-locked');
+  });
+
   // Mobiel menu (eenvoudige toggle placeholder)
   document.getElementById('menuToggle').addEventListener('click', function(){
     document.querySelector('.nav-links').classList.toggle('mobile-open');
