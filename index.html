@@ -40,6 +40,11 @@
     font-weight:400;
     line-height:1.6;
     -webkit-font-smoothing:antialiased;
+    transition:background-color .4s ease-out;
+  }
+
+  header, .hero-panel, .quote-section, .service-card{
+    transition:background-color .4s ease-out, border-color .4s ease-out;
   }
 
   a{color:inherit;}
@@ -659,6 +664,69 @@
   document.getElementById('menuToggle').addEventListener('click', function(){
     document.querySelector('.nav-links').classList.toggle('mobile-open');
   });
+
+  // Scroll-gebonden kleurovergang (licht -> donker -> licht) op basis van scrollpositie
+  (function(){
+    const root = document.documentElement;
+
+    // Kleurstops (RGB) — van licht bovenaan naar donkerder in het midden en weer lichter onderaan
+    const stops = [
+      { bg:[22,48,92],   panel:[28,59,110],  panel2:[32,68,128] },   // boven
+      { bg:[10,22,46],   panel:[15,30,58],   panel2:[18,36,68]  },   // midden (donkerder)
+      { bg:[26,58,108],  panel:[33,71,128],  panel2:[38,80,148] }    // onder
+    ];
+
+    function lerp(a, b, t){ return a + (b - a) * t; }
+
+    function lerpColor(c1, c2, t){
+      return [
+        Math.round(lerp(c1[0], c2[0], t)),
+        Math.round(lerp(c1[1], c2[1], t)),
+        Math.round(lerp(c1[2], c2[2], t))
+      ];
+    }
+
+    function toRgbString(c){ return `rgb(${c[0]}, ${c[1]}, ${c[2]})`; }
+
+    function updateColors(){
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? Math.min(Math.max(scrollTop / docHeight, 0), 1) : 0;
+
+      let segment, segT;
+      if (progress < 0.5){
+        segment = 0;
+        segT = progress / 0.5;
+      } else {
+        segment = 1;
+        segT = (progress - 0.5) / 0.5;
+      }
+
+      const from = stops[segment];
+      const to = stops[segment + 1];
+
+      const bg = lerpColor(from.bg, to.bg, segT);
+      const panel = lerpColor(from.panel, to.panel, segT);
+      const panel2 = lerpColor(from.panel2, to.panel2, segT);
+
+      root.style.setProperty('--bg', toRgbString(bg));
+      root.style.setProperty('--panel', toRgbString(panel));
+      root.style.setProperty('--panel-2', toRgbString(panel2));
+    }
+
+    let ticking = false;
+    window.addEventListener('scroll', function(){
+      if (!ticking){
+        requestAnimationFrame(function(){
+          updateColors();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive:true });
+
+    updateColors();
+  })();
 
   // Scroll reveal
   if ('IntersectionObserver' in window){
