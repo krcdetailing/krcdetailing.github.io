@@ -18,6 +18,10 @@
     --muted:#9a9ca3;
     --card:#151517;
     --border:#232327;
+    --radius-sm:4px;
+    --radius-md:10px;
+    --radius-lg:14px;
+    --ease:cubic-bezier(.22,.9,.32,1);
   }
   *{margin:0;padding:0;box-sizing:border-box;}
   html{scroll-behavior:smooth;}
@@ -30,6 +34,23 @@
   a{color:inherit;text-decoration:none;}
   img{max-width:100%;display:block;}
   ul{list-style:none;}
+  button{font:inherit;}
+
+  a:focus-visible,
+  button:focus-visible{
+    outline:2px solid var(--red);
+    outline-offset:3px;
+    border-radius:2px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *, *::before, *::after{
+      animation-duration:.001ms !important;
+      animation-iteration-count:1 !important;
+      transition-duration:.001ms !important;
+      scroll-behavior:auto !important;
+    }
+  }
 
   /* ---------- Dynamic background ---------- */
   #bg-canvas{
@@ -124,23 +145,31 @@
 
   @media(max-width:860px){
     nav{
-      position:fixed;
-      top:74px;left:0;right:0;
+      position:absolute;
+      top:100%;left:0;right:0;
       background:rgba(10,10,12,0.97);
+      backdrop-filter:blur(14px);
       flex-direction:column;
       padding:20px 5% 30px;
       border-bottom:1px solid var(--border);
-      transform:translateY(-140%);
-      transition:transform .3s ease;
+      transform:translateY(-8px);
+      opacity:0;
+      pointer-events:none;
+      transition:transform .25s var(--ease), opacity .25s var(--ease);
     }
-    nav.open{transform:translateY(0);}
-    nav ul{flex-direction:column;gap:18px;}
+    nav.open{transform:translateY(0);opacity:1;pointer-events:auto;}
+    nav ul{flex-direction:column;gap:6px;}
+    nav ul li{border-bottom:1px solid var(--border);}
+    nav ul li:last-child{border-bottom:0;}
+    nav a{display:block;padding:14px 4px;}
+    nav a::after{display:none;}
     .header-cta{display:none;}
     .nav-toggle{display:block;}
   }
 
   /* ---------- Hero ---------- */
   .hero{
+    position:relative;
     min-height:100vh;
     display:flex;
     align-items:center;
@@ -189,14 +218,16 @@
     font-size:.9rem;
     letter-spacing:.5px;
     text-transform:uppercase;
-    border-radius:2px;
-    transition:all .2s;
+    border-radius:var(--radius-sm);
+    transition:background .2s var(--ease), border-color .2s var(--ease), transform .2s var(--ease), box-shadow .2s var(--ease);
     display:inline-block;
   }
   .btn-primary{background:var(--red);color:#fff;box-shadow:0 8px 24px -8px rgba(225,6,0,0.6);}
-  .btn-primary:hover{background:#ff0900;transform:translateY(-2px);}
+  .btn-primary:hover{background:#ff0900;transform:translateY(-2px);box-shadow:0 12px 28px -8px rgba(225,6,0,0.75);}
+  .btn-primary:active{transform:translateY(0);}
   .btn-outline{border:1px solid var(--border);color:var(--text);}
-  .btn-outline:hover{border-color:var(--chrome);background:rgba(255,255,255,0.03);}
+  .btn-outline:hover{border-color:var(--chrome);background:rgba(255,255,255,0.03);transform:translateY(-2px);}
+  .btn-outline:active{transform:translateY(0);}
   .hero-stats{display:flex;gap:36px;flex-wrap:wrap;}
   .hero-stats div{border-left:2px solid var(--red);padding-left:14px;}
   .hero-stats strong{display:block;font-size:1.6rem;font-weight:800;}
@@ -312,6 +343,28 @@
   }
   .stage-caption b{color:var(--red);}
 
+  .scroll-cue{
+    position:absolute;
+    bottom:28px;
+    left:50%;
+    transform:translateX(-50%);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:6px;
+    color:var(--muted);
+    font-size:.7rem;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    opacity:.7;
+  }
+  .scroll-cue svg{width:16px;height:16px;animation:scrollBounce 1.8s ease-in-out infinite;}
+  @keyframes scrollBounce{
+    0%,100%{transform:translateY(0);opacity:.5;}
+    50%{transform:translateY(6px);opacity:1;}
+  }
+  @media(max-width:860px){ .scroll-cue{display:none;} }
+
   /* ---------- Sections shared ---------- */
   section{padding:110px 5%;}
   .section-head{text-align:center;max-width:640px;margin:0 auto 60px;}
@@ -330,11 +383,15 @@
   .service-card{
     background:var(--card);
     border:1px solid var(--border);
-    border-radius:6px;
+    border-radius:var(--radius-md);
     padding:34px 28px;
-    transition:transform .25s, border-color .25s;
+    transition:transform .3s var(--ease), border-color .3s var(--ease), box-shadow .3s var(--ease);
   }
-  .service-card:hover{transform:translateY(-6px);border-color:var(--red-dim);}
+  .service-card:hover{
+    transform:translateY(-6px);
+    border-color:var(--red-dim);
+    box-shadow:0 18px 30px -16px rgba(225,6,0,0.35);
+  }
   .service-icon{
     width:52px;height:52px;
     border-radius:50%;
@@ -342,7 +399,9 @@
     display:flex;align-items:center;justify-content:center;
     margin-bottom:20px;
     font-size:1.4rem;
+    transition:transform .3s var(--ease);
   }
+  .service-card:hover .service-icon{transform:scale(1.08) rotate(-4deg);}
   .service-card h3{font-size:1.15rem;font-weight:800;margin-bottom:10px;}
   .service-card p{color:var(--muted);font-size:.92rem;line-height:1.6;}
 
@@ -383,6 +442,7 @@
   .process-step h4{font-weight:700;margin-bottom:4px;}
   .process-step p{color:var(--muted);font-size:.88rem;line-height:1.5;}
   .about-text{flex:1 1 380px;}
+  .about-text h2{font-size:clamp(1.7rem,3.2vw,2.2rem);font-weight:900;margin-bottom:18px;letter-spacing:-.5px;}
   .about-text p{color:var(--muted);line-height:1.7;margin-bottom:16px;}
 
   /* ---------- Gallery (before/after) ---------- */
@@ -396,11 +456,13 @@
   .ba-card{
     position:relative;
     aspect-ratio:4/3;
-    border-radius:8px;
+    border-radius:var(--radius-md);
     overflow:hidden;
     border:1px solid var(--border);
     cursor:pointer;
+    transition:border-color .3s var(--ease), box-shadow .3s var(--ease);
   }
+  .ba-card:hover{border-color:var(--red-dim);box-shadow:0 18px 30px -16px rgba(225,6,0,0.35);}
   .ba-card .ba-face{
     position:absolute;inset:0;
     display:flex;align-items:center;justify-content:center;
@@ -436,11 +498,24 @@
   .t-card{
     background:var(--card);
     border:1px solid var(--border);
-    border-radius:8px;
+    border-radius:var(--radius-md);
     padding:28px;
+    position:relative;
+    transition:transform .3s var(--ease), border-color .3s var(--ease);
+  }
+  .t-card:hover{transform:translateY(-4px);border-color:var(--red-dim);}
+  .t-quote{
+    position:absolute;
+    top:18px;right:22px;
+    font-size:3rem;
+    font-weight:900;
+    line-height:1;
+    color:var(--red);
+    opacity:.18;
+    font-family:Georgia,serif;
   }
   .t-stars{color:var(--red);letter-spacing:2px;margin-bottom:14px;font-size:1rem;}
-  .t-card p{color:var(--muted);line-height:1.6;margin-bottom:16px;font-size:.93rem;}
+  .t-card p{color:var(--muted);line-height:1.6;margin-bottom:16px;font-size:.93rem;position:relative;z-index:1;}
   .t-name{font-weight:700;font-size:.9rem;}
 
   /* ---------- Contact ---------- */
@@ -502,6 +577,31 @@
   .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease, transform .7s ease;}
   .reveal.in{opacity:1;transform:none;}
 
+  /* active nav link while scrolling */
+  nav a.active{color:var(--text);}
+  nav a.active::after{width:100%;}
+
+  /* back to top */
+  #toTop{
+    position:fixed;
+    right:22px;bottom:22px;
+    width:46px;height:46px;
+    border-radius:50%;
+    background:var(--card);
+    border:1px solid var(--border);
+    color:var(--text);
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;
+    z-index:90;
+    opacity:0;
+    transform:translateY(10px);
+    pointer-events:none;
+    transition:opacity .25s var(--ease), transform .25s var(--ease), border-color .2s;
+  }
+  #toTop.show{opacity:1;transform:none;pointer-events:auto;}
+  #toTop:hover{border-color:var(--red);color:var(--red);}
+  #toTop svg{width:18px;height:18px;}
+
   ::selection{background:var(--red);color:#fff;}
 </style>
 </head>
@@ -516,7 +616,7 @@
     <img src="krc-logo.png" alt="KRC Detailing logo">
     <span>KRC <em>DETAILING</em></span>
   </div>
-  <button class="nav-toggle" id="navToggle" aria-label="Menu openen/sluiten">&#9776;</button>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu openen/sluiten" aria-expanded="false" aria-controls="siteNav">&#9776;</button>
   <nav id="siteNav">
     <ul>
       <li><a href="#services">Diensten</a></li>
@@ -564,6 +664,11 @@
       <div class="car-platform"></div>
       <div class="stage-caption"><b>360°</b> draaischijf — vuil erin, <b>showroom-schoon</b> eruit</div>
     </div>
+
+    <a href="#services" class="scroll-cue" aria-label="Scroll naar diensten">
+      <span>Scroll</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4v16m0 0l-6-6m6 6l6-6"/></svg>
+    </a>
   </section>
 
   <!-- SERVICES -->
@@ -630,7 +735,7 @@
       </div>
       <div class="about-text reveal">
         <div class="hero-eyebrow">Waarom KRC Detailing</div>
-        <h2 style="font-size:2.2rem;font-weight:900;margin-bottom:18px;">Gebouwd op zorg, geen shortcuts</h2>
+        <h2>Gebouwd op zorg, geen shortcuts</h2>
         <p>KRC Detailing is een in IJmuiden gevestigde detailingservice die de klus goed wil doen — geen gehaaste wasbeurten, geen gedeelde waterbakken, geen concessies aan bescherming.</p>
         <p>Elke auto krijgt een handmatige afwerking, premium producten en een eigenaar die de auto behandelt als zijn eigen — want we staan nog aan het begin en elk resultaat draagt onze naam.</p>
         <a href="#contact" class="btn btn-primary">Neem contact op</a>
@@ -642,8 +747,8 @@
   <section id="gallery">
     <div class="section-head reveal">
       <div class="hero-eyebrow">Resultaten</div>
-      <h2>Hover om het verschil te zien</h2>
-      <p>Echte transformaties, voor en na — beweeg (of tik) over elke kaart.</p>
+      <h2>Dit is het niveau dat we nastreven</h2>
+      <p>Voorbeeldweergave van voor/na — de eerste echte klantfoto's volgen hier snel. Beweeg (of tik) over elke kaart.</p>
     </div>
     <div class="gallery-grid">
       <div class="ba-card reveal">
@@ -673,16 +778,19 @@
     </div>
     <div class="testimonials">
       <div class="t-card reveal">
+        <div class="t-quote">"</div>
         <div class="t-stars">★★★★★</div>
         <p>"KRC geboekt voor een volledige exterieurbehandeling — de oog voor detail was ongekend. De lak zag er beter uit dan de dag dat ik de auto kocht."</p>
         <div class="t-name">— M. de Vries, IJmuiden</div>
       </div>
       <div class="t-card reveal">
+        <div class="t-quote">"</div>
         <div class="t-stars">★★★★★</div>
         <p>"Interieur zat vol zand van het strand, kwam brandschoon terug. Heel vriendelijk en het is duidelijk dat ze het goed willen doen."</p>
         <div class="t-name">— S. Bakker</div>
       </div>
       <div class="t-card reveal">
+        <div class="t-quote">"</div>
         <div class="t-stars">★★★★★</div>
         <p>"Keramische coating was foutloos, water parelt er nu zo vanaf. Absolute aanrader, boek op tijd."</p>
         <div class="t-name">— R. Jansen</div>
@@ -737,14 +845,48 @@
   </div>
 </footer>
 
+<button id="toTop" aria-label="Terug naar boven">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20V4m0 0l-6 6m6-6l6 6"/></svg>
+</button>
+
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
 
   var toggle = document.getElementById('navToggle');
   var nav = document.getElementById('siteNav');
-  toggle.addEventListener('click', function(){ nav.classList.toggle('open'); });
+  toggle.addEventListener('click', function(){
+    var open = nav.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open);
+  });
   nav.querySelectorAll('a').forEach(function(a){
-    a.addEventListener('click', function(){ nav.classList.remove('open'); });
+    a.addEventListener('click', function(){
+      nav.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // active nav link on scroll
+  var navLinks = Array.from(nav.querySelectorAll('a[href^="#"]'));
+  var sections = navLinks
+    .map(function(a){ return document.querySelector(a.getAttribute('href')); })
+    .filter(Boolean);
+  var spy = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      var link = navLinks.find(function(a){ return a.getAttribute('href') === '#' + entry.target.id; });
+      if(!link) return;
+      if(entry.isIntersecting) navLinks.forEach(function(a){ a.classList.remove('active'); });
+      if(entry.isIntersecting) link.classList.add('active');
+    });
+  }, {rootMargin:'-45% 0px -50% 0px'});
+  sections.forEach(function(s){ spy.observe(s); });
+
+  // back to top
+  var toTop = document.getElementById('toTop');
+  window.addEventListener('scroll', function(){
+    toTop.classList.toggle('show', window.scrollY > 600);
+  }, {passive:true});
+  toTop.addEventListener('click', function(){
+    window.scrollTo({top:0, behavior:'smooth'});
   });
 
   // scroll reveal
