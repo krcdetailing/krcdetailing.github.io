@@ -8,16 +8,18 @@
 <link rel="icon" href="krc-logo.png">
 <style>
   :root{
-    --bg:#0a0a0c;
-    --bg2:#111114;
-    --red:#e10600;
-    --red-dim:#8a0400;
-    --chrome:#c9ccd1;
-    --chrome-dim:#7d818a;
-    --text:#f2f2f4;
-    --muted:#9a9ca3;
-    --card:#151517;
-    --border:#232327;
+    --bg:#152a41;
+    --bg2:#101e30;
+    --accent:#6096BA;
+    --accent-btn:#447198;
+    --accent-btn-hover:#4f7fa8;
+    --accent-dim:#274C77;
+    --highlight:#A3CEF1;
+    --highlight-dim:#8B8C89;
+    --text:#E7ECEF;
+    --muted:rgba(231,236,239,0.7);
+    --card:#1e3b5d;
+    --border:rgba(231,236,239,0.10);
     --radius-sm:4px;
     --radius-md:10px;
     --radius-lg:14px;
@@ -38,7 +40,7 @@
 
   a:focus-visible,
   button:focus-visible{
-    outline:2px solid var(--red);
+    outline:2px solid var(--accent);
     outline-offset:3px;
     border-radius:2px;
   }
@@ -60,16 +62,16 @@
     height:100%;
     z-index:0;
     background:
-      radial-gradient(1200px 600px at 15% -10%, rgba(225,6,0,0.14), transparent 60%),
-      radial-gradient(1000px 700px at 110% 20%, rgba(120,10,10,0.12), transparent 55%),
-      linear-gradient(180deg,#0a0a0c 0%,#0d0d10 40%,#0a0a0c 100%);
+      radial-gradient(1200px 600px at 15% -10%, rgba(96,150,186,0.16), transparent 60%),
+      radial-gradient(1000px 700px at 110% 20%, rgba(163,206,241,0.10), transparent 55%),
+      linear-gradient(180deg,#152a41 0%,#101e30 40%,#152a41 100%);
   }
   .bg-sheen{
     position:fixed;
     inset:0;
     z-index:0;
     pointer-events:none;
-    background:linear-gradient(115deg, transparent 0%, rgba(225,6,0,0.05) 45%, rgba(255,255,255,0.03) 50%, transparent 55%, transparent 100%);
+    background:linear-gradient(115deg, transparent 0%, rgba(96,150,186,0.08) 45%, rgba(255,255,255,0.03) 50%, transparent 55%, transparent 100%);
     background-size:300% 300%;
     animation:sheenMove 14s ease-in-out infinite;
   }
@@ -109,7 +111,7 @@
   .brand{display:flex;align-items:center;gap:10px;}
   .brand img{height:46px;width:auto;}
   .brand span{font-weight:800;letter-spacing:1px;font-size:1.15rem;}
-  .brand span em{color:var(--red);font-style:normal;}
+  .brand span em{color:var(--highlight);font-style:normal;}
   nav ul{display:flex;gap:32px;}
   nav a{
     font-size:.92rem;
@@ -124,14 +126,14 @@
   nav a::after{
     content:'';
     position:absolute;left:0;bottom:-6px;
-    width:0;height:2px;background:var(--red);
+    width:0;height:2px;background:var(--highlight);
     transition:width .25s;
   }
   nav a:hover::after{width:100%;}
   .header-cta{
     display:inline-block;
     padding:10px 20px;
-    background:var(--red);
+    background:var(--accent-btn);
     color:#fff;
     font-weight:700;
     font-size:.85rem;
@@ -140,7 +142,7 @@
     border-radius:2px;
     transition:background .2s, transform .2s;
   }
-  .header-cta:hover{background:#ff0900;transform:translateY(-1px);}
+  .header-cta:hover{background:var(--accent-btn-hover);transform:translateY(-1px);}
   .nav-toggle{display:none;background:none;border:none;color:var(--text);font-size:1.6rem;cursor:pointer;}
 
   @media(max-width:860px){
@@ -182,14 +184,14 @@
     display:inline-flex;
     align-items:center;
     gap:8px;
-    color:var(--red);
+    color:var(--highlight);
     font-weight:700;
     letter-spacing:2px;
     text-transform:uppercase;
     font-size:.8rem;
     margin-bottom:18px;
   }
-  .hero-eyebrow::before{content:'';width:26px;height:2px;background:var(--red);}
+  .hero-eyebrow::before{content:'';width:26px;height:2px;background:var(--highlight);}
   .hero-text h1{
     font-size:clamp(2.3rem,5vw,4rem);
     font-weight:900;
@@ -199,7 +201,7 @@
   }
   .hero-text h1 em{
     font-style:normal;
-    background:linear-gradient(90deg,var(--red),#ff6a5c);
+    background:linear-gradient(90deg,var(--accent-btn),var(--highlight));
     -webkit-background-clip:text;
     background-clip:text;
     color:transparent;
@@ -222,14 +224,14 @@
     transition:background .2s var(--ease), border-color .2s var(--ease), transform .2s var(--ease), box-shadow .2s var(--ease);
     display:inline-block;
   }
-  .btn-primary{background:var(--red);color:#fff;box-shadow:0 8px 24px -8px rgba(225,6,0,0.6);}
-  .btn-primary:hover{background:#ff0900;transform:translateY(-2px);box-shadow:0 12px 28px -8px rgba(225,6,0,0.75);}
+  .btn-primary{background:var(--accent-btn);color:#fff;box-shadow:0 8px 24px -8px rgba(68,113,152,0.6);}
+  .btn-primary:hover{background:var(--accent-btn-hover);transform:translateY(-2px);box-shadow:0 12px 28px -8px rgba(68,113,152,0.75);}
   .btn-primary:active{transform:translateY(0);}
   .btn-outline{border:1px solid var(--border);color:var(--text);}
-  .btn-outline:hover{border-color:var(--chrome);background:rgba(255,255,255,0.03);transform:translateY(-2px);}
+  .btn-outline:hover{border-color:var(--highlight);background:rgba(255,255,255,0.03);transform:translateY(-2px);}
   .btn-outline:active{transform:translateY(0);}
   .hero-stats{display:flex;gap:36px;flex-wrap:wrap;}
-  .hero-stats div{border-left:2px solid var(--red);padding-left:14px;}
+  .hero-stats div{border-left:2px solid var(--highlight);padding-left:14px;}
   .hero-stats strong{display:block;font-size:1.6rem;font-weight:800;}
   .hero-stats span{color:var(--muted);font-size:.8rem;text-transform:uppercase;letter-spacing:.5px;}
 
@@ -250,7 +252,7 @@
     height:26px;
     left:50%;
     transform:translateX(-50%);
-    background:radial-gradient(ellipse at center, rgba(225,6,0,0.35), rgba(0,0,0,0) 72%);
+    background:radial-gradient(ellipse at center, rgba(96,150,186,0.35), rgba(0,0,0,0) 72%);
     filter:blur(2px);
     animation:platformPulse 4.6s ease-in-out infinite;
   }
@@ -288,7 +290,7 @@
     letter-spacing:1.5px;
     text-transform:uppercase;
     backdrop-filter:blur(4px);
-    background:rgba(225,6,0,0.55);
+    background:rgba(96,150,186,0.55);
     color:#fff;
   }
   .stage-caption{
@@ -302,7 +304,7 @@
     letter-spacing:2px;
     text-transform:uppercase;
   }
-  .stage-caption b{color:var(--red);}
+  .stage-caption b{color:var(--highlight);}
 
   .scroll-cue{
     position:absolute;
@@ -350,13 +352,13 @@
   }
   .service-card:hover{
     transform:translateY(-6px);
-    border-color:var(--red-dim);
-    box-shadow:0 18px 30px -16px rgba(225,6,0,0.35);
+    border-color:var(--accent-dim);
+    box-shadow:0 18px 30px -16px rgba(39,76,119,0.45);
   }
   .service-icon{
     width:52px;height:52px;
     border-radius:50%;
-    background:linear-gradient(135deg,var(--red),#7a0400);
+    background:linear-gradient(135deg,var(--accent),var(--accent-dim));
     display:flex;align-items:center;justify-content:center;
     margin-bottom:20px;
     font-size:1.4rem;
@@ -387,15 +389,15 @@
   .about-media::before{
     content:'';
     position:absolute;inset:0;
-    background:radial-gradient(circle at 30% 20%, rgba(225,6,0,0.12), transparent 60%);
+    background:radial-gradient(circle at 30% 20%, rgba(96,150,186,0.14), transparent 60%);
   }
   .process-step{display:flex;gap:16px;margin-bottom:26px;position:relative;z-index:1;}
   .process-step:last-child{margin-bottom:0;}
   .process-num{
     flex:0 0 auto;
     width:38px;height:38px;
-    border:1px solid var(--red);
-    color:var(--red);
+    border:1px solid var(--highlight);
+    color:var(--highlight);
     border-radius:50%;
     display:flex;align-items:center;justify-content:center;
     font-weight:800;
@@ -423,7 +425,7 @@
     cursor:pointer;
     transition:border-color .3s var(--ease), box-shadow .3s var(--ease);
   }
-  .ba-card:hover{border-color:var(--red-dim);box-shadow:0 18px 30px -16px rgba(225,6,0,0.35);}
+  .ba-card:hover{border-color:var(--accent-dim);box-shadow:0 18px 30px -16px rgba(39,76,119,0.45);}
   .ba-card .ba-face{
     position:absolute;inset:0;
     display:flex;align-items:center;justify-content:center;
@@ -441,7 +443,7 @@
   }
   .ba-face.clean{
     background:radial-gradient(circle at 30% 30%, #1f2733, #0b0d10 75%);
-    color:var(--chrome);
+    color:var(--highlight);
     opacity:0;
   }
   .ba-card:hover .ba-face.clean{opacity:1;}
@@ -464,18 +466,18 @@
     position:relative;
     transition:transform .3s var(--ease), border-color .3s var(--ease);
   }
-  .t-card:hover{transform:translateY(-4px);border-color:var(--red-dim);}
+  .t-card:hover{transform:translateY(-4px);border-color:var(--accent-dim);}
   .t-quote{
     position:absolute;
     top:18px;right:22px;
     font-size:3rem;
     font-weight:900;
     line-height:1;
-    color:var(--red);
+    color:var(--highlight);
     opacity:.18;
     font-family:Georgia,serif;
   }
-  .t-stars{color:var(--red);letter-spacing:2px;margin-bottom:14px;font-size:1rem;}
+  .t-stars{color:var(--highlight);letter-spacing:2px;margin-bottom:14px;font-size:1rem;}
   .t-card p{color:var(--muted);line-height:1.6;margin-bottom:16px;font-size:.93rem;position:relative;z-index:1;}
   .t-name{font-weight:700;font-size:.9rem;}
 
@@ -499,8 +501,8 @@
     width:40px;height:40px;
     flex:0 0 auto;
     border-radius:8px;
-    background:rgba(225,6,0,0.12);
-    color:var(--red);
+    background:rgba(96,150,186,0.16);
+    color:var(--highlight);
     display:flex;align-items:center;justify-content:center;
     font-size:1.1rem;
   }
@@ -532,7 +534,7 @@
     display:flex;align-items:center;justify-content:center;
     transition:border-color .2s, color .2s;
   }
-  .footer-socials a:hover{border-color:var(--red);color:var(--red);}
+  .footer-socials a:hover{border-color:var(--highlight);color:var(--highlight);}
 
   /* reveal on scroll */
   .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease, transform .7s ease;}
@@ -560,10 +562,10 @@
     transition:opacity .25s var(--ease), transform .25s var(--ease), border-color .2s;
   }
   #toTop.show{opacity:1;transform:none;pointer-events:auto;}
-  #toTop:hover{border-color:var(--red);color:var(--red);}
+  #toTop:hover{border-color:var(--highlight);color:var(--highlight);}
   #toTop svg{width:18px;height:18px;}
 
-  ::selection{background:var(--red);color:#fff;}
+  ::selection{background:var(--accent-btn);color:#fff;}
 </style>
 </head>
 <body>
@@ -789,7 +791,7 @@
 <footer>
   <div class="brand">
     <img src="krc-logo.png" alt="KRC Detailing logo" style="height:34px;">
-    <span>KRC <em style="color:var(--red);font-style:normal;">DETAILING</em></span>
+    <span>KRC <em style="color:var(--highlight);font-style:normal;">DETAILING</em></span>
   </div>
   <div>© <span id="year"></span> KRC Detailing — IJmuiden. Alle rechten voorbehouden.</div>
   <div class="footer-socials">
@@ -886,8 +888,8 @@
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.r, 0, Math.PI*2);
       ctx.fillStyle = this.hueRed
-        ? 'rgba(225,6,0,' + this.alpha + ')'
-        : 'rgba(201,204,209,' + this.alpha + ')';
+        ? 'rgba(163,206,241,' + this.alpha + ')'
+        : 'rgba(231,236,239,' + this.alpha + ')';
       ctx.fill();
     };
 
