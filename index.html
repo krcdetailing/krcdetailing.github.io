@@ -548,6 +548,7 @@
     cursor:pointer;
   }
   .form-row select:invalid{color:var(--muted);}
+  .form-row select:disabled{opacity:.5;cursor:not-allowed;}
   .form-row option{background:var(--card);color:var(--text);}
   .form-row input::placeholder,
   .form-row textarea::placeholder{color:var(--muted);opacity:.6;}
@@ -896,6 +897,18 @@
             </select>
           </div>
           <div class="form-row">
+            <label for="f-merk">Automerk</label>
+            <select id="f-merk" name="Automerk" required>
+              <option value="" disabled selected>Kies een merk…</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label for="f-model">Model</label>
+            <select id="f-model" name="Model" required disabled>
+              <option value="" disabled selected>Kies eerst een merk…</option>
+            </select>
+          </div>
+          <div class="form-row">
             <label for="f-bericht">Bericht</label>
             <textarea id="f-bericht" name="Bericht" rows="4" placeholder="Vertel ons over uw auto en de gewenste behandeling" required></textarea>
           </div>
@@ -944,6 +957,48 @@
       toggle.setAttribute('aria-expanded', 'false');
     });
   });
+
+  // car brand -> model cascading dropdown
+  var CAR_MODELS = {
+    'Audi': ['A1','A3','A4','A5','A6','A7','A8','Q2','Q3','Q4 e-tron','Q5','Q7','Q8','RS3','RS4','RS5','RS6','RS7','TT','e-tron GT','Anders'],
+    'BMW': ['1 Serie','2 Serie','3 Serie','4 Serie','5 Serie','7 Serie','X1','X2','X3','X4','X5','X6','X7','M2','M3','M4','M5','i4','iX','Anders'],
+    'Mercedes-Benz': ['A-Klasse','B-Klasse','C-Klasse','E-Klasse','S-Klasse','CLA','CLS','GLA','GLB','GLC','GLE','GLS','AMG GT','EQA','EQE','EQS','Anders'],
+    'Volkswagen': ['Polo','Golf','Passat','Arteon','T-Roc','T-Cross','Tiguan','Touareg','ID.3','ID.4','ID.5','Anders'],
+    'Porsche': ['911','718 Cayman','718 Boxster','Panamera','Macan','Cayenne','Taycan','Anders'],
+    'Volvo': ['V40','V60','V90','XC40','XC60','XC90','S60','S90','Anders'],
+    'Toyota': ['Aygo X','Yaris','Corolla','C-HR','RAV4','Camry','GR Supra','Anders'],
+    'Ford': ['Fiesta','Focus','Puma','Kuga','Mustang','Mustang Mach-E','Anders'],
+    'Hyundai': ['i20','i30','Kona','Tucson','Santa Fe','Ioniq 5','Anders'],
+    'Kia': ['Picanto','Ceed','Niro','Sportage','Sorento','EV6','Anders'],
+    'Overig / ander merk': ['Anders — graag vermelden in bericht']
+  };
+  var merkSelect = document.getElementById('f-merk');
+  var modelSelect = document.getElementById('f-model');
+  if(merkSelect && modelSelect){
+    Object.keys(CAR_MODELS).forEach(function(brand){
+      var opt = document.createElement('option');
+      opt.value = brand;
+      opt.textContent = brand;
+      merkSelect.appendChild(opt);
+    });
+    merkSelect.addEventListener('change', function(){
+      var models = CAR_MODELS[merkSelect.value] || [];
+      modelSelect.innerHTML = '';
+      var placeholder = document.createElement('option');
+      placeholder.value = '';
+      placeholder.disabled = true;
+      placeholder.selected = true;
+      placeholder.textContent = 'Kies een model…';
+      modelSelect.appendChild(placeholder);
+      models.forEach(function(model){
+        var opt = document.createElement('option');
+        opt.value = model;
+        opt.textContent = model;
+        modelSelect.appendChild(opt);
+      });
+      modelSelect.disabled = false;
+    });
+  }
 
   // contact form — submit via FormSubmit's AJAX endpoint so we stay on-page
   var contactForm = document.getElementById('contactForm');
