@@ -261,47 +261,22 @@
   .car-rotor{
     width:100%;
     max-width:560px;
-    aspect-ratio:4/3;
+    aspect-ratio:16/9;
     position:relative;
-    transform-style:preserve-3d;
-    animation:rotateCar 9s linear infinite;
-  }
-  @keyframes rotateCar{
-    0%{transform:rotateY(0deg);}
-    100%{transform:rotateY(360deg);}
-  }
-  .car-face{
-    position:absolute;
-    inset:0;
-    border-radius:14px;
+    border-radius:var(--radius-lg);
     overflow:hidden;
-    backface-visibility:hidden;
     box-shadow:0 30px 40px -10px rgba(0,0,0,0.6);
     border:1px solid rgba(255,255,255,0.06);
+    animation:carFloat 5s ease-in-out infinite;
   }
-  .car-face img{
+  @keyframes carFloat{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-10px);}
+  }
+  .car-rotor img{
     width:100%;height:100%;
     object-fit:cover;
     display:block;
-  }
-  .car-face.front{transform:rotateY(0deg);}
-  .car-face.back{transform:rotateY(180deg);}
-  .car-face.front img{filter:grayscale(.35) sepia(.25) brightness(.72) contrast(.92) saturate(.8);}
-  .car-face.back img{filter:saturate(1.25) contrast(1.08) brightness(1.06);}
-
-  /* grime texture sits over the dirty face only */
-  .grime-overlay{
-    position:absolute;inset:0;
-    background:
-      radial-gradient(ellipse at 30% 80%, rgba(60,42,20,0.55), transparent 60%),
-      radial-gradient(ellipse at 75% 30%, rgba(50,35,20,0.4), transparent 55%);
-    mix-blend-mode:multiply;
-  }
-  .grime-overlay::after{
-    content:'';
-    position:absolute;inset:0;
-    opacity:.4;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' seed='7'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.3  0 0 0 0 0.22  0 0 0 0 0.12  0 0 0 0.5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
   .label-tag{
     position:absolute;
@@ -313,22 +288,8 @@
     letter-spacing:1.5px;
     text-transform:uppercase;
     backdrop-filter:blur(4px);
-  }
-  .car-face.front .label-tag{background:rgba(80,50,20,0.55);color:#e8c9a0;}
-  .car-face.back .label-tag{background:rgba(225,6,0,0.55);color:#fff;}
-
-  /* glossy shine sweep on the clean face */
-  .shine-sweep{
-    position:absolute;inset:0;
-    background:linear-gradient(115deg, transparent 30%, rgba(255,255,255,0.35) 48%, rgba(255,255,255,0.05) 55%, transparent 70%);
-    background-size:220% 220%;
-    animation:sweepMove 3.2s ease-in-out infinite;
-    mix-blend-mode:overlay;
-  }
-  @keyframes sweepMove{
-    0%{background-position:120% 0%;}
-    50%{background-position:-20% 100%;}
-    100%{background-position:120% 0%;}
+    background:rgba(225,6,0,0.55);
+    color:#fff;
   }
   .stage-caption{
     position:absolute;
@@ -650,19 +611,11 @@
 
     <div class="car-stage" aria-hidden="true">
       <div class="car-rotor">
-        <div class="car-face front">
-          <img src="assets/rs6-hero.jpg" alt="Audi RS6 — vuil">
-          <div class="grime-overlay"></div>
-          <span class="label-tag">Vuil</span>
-        </div>
-        <div class="car-face back">
-          <img src="assets/rs6-hero.jpg" alt="Audi RS6 — schoon">
-          <div class="shine-sweep"></div>
-          <span class="label-tag">Schoon</span>
-        </div>
+        <img src="assets/rs6-hero.gif" alt="Audi RS6" loading="eager">
+        <span class="label-tag">KRC Detailing</span>
       </div>
       <div class="car-platform"></div>
-      <div class="stage-caption"><b>360°</b> draaischijf — vuil erin, <b>showroom-schoon</b> eruit</div>
+      <div class="stage-caption"><b>Elke</b> auto krijgt de <b>showroom-behandeling</b></div>
     </div>
 
     <a href="#services" class="scroll-cue" aria-label="Scroll naar diensten">
