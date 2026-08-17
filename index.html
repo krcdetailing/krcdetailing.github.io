@@ -485,7 +485,7 @@
   .contact-wrap{
     display:grid;
     grid-template-columns:1fr 1fr;
-    gap:40px;
+    gap:0;
     max-width:1100px;
     margin:0 auto;
     background:var(--card);
@@ -507,10 +507,78 @@
     font-size:1.1rem;
   }
   .contact-row a, .contact-row span{font-weight:600;}
-  .contact-map{min-height:320px;}
-  .contact-map iframe{width:100%;height:100%;min-height:320px;border:0;filter:grayscale(.4) invert(.92) contrast(.9);}
+
+  .contact-form-wrap{
+    padding:48px;
+    background:rgba(21,42,65,0.5);
+    border-left:1px solid var(--border);
+  }
+  .form-row{margin-bottom:16px;}
+  .form-row label{
+    display:block;
+    font-size:.78rem;
+    font-weight:700;
+    letter-spacing:.5px;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin-bottom:7px;
+  }
+  .form-row label span{text-transform:none;letter-spacing:0;font-weight:400;opacity:.7;}
+  .form-row input,
+  .form-row textarea{
+    width:100%;
+    padding:12px 14px;
+    background:var(--bg);
+    border:1px solid var(--border);
+    border-radius:var(--radius-sm);
+    color:var(--text);
+    font:inherit;
+    font-size:.92rem;
+    resize:vertical;
+    transition:border-color .2s var(--ease), box-shadow .2s var(--ease);
+  }
+  .form-row input::placeholder,
+  .form-row textarea::placeholder{color:var(--muted);opacity:.6;}
+  .form-row input:focus,
+  .form-row textarea:focus{
+    outline:none;
+    border-color:var(--accent);
+    box-shadow:0 0 0 3px rgba(96,150,186,0.2);
+  }
+  .form-submit{width:100%;border:0;cursor:pointer;margin-top:6px;}
+  .form-note{
+    font-size:.78rem;
+    color:var(--muted);
+    margin-top:12px;
+    text-align:center;
+  }
+  .form-note.error{color:#e8877a;}
+  .form-success{
+    display:none;
+    background:rgba(96,150,186,0.14);
+    border:1px solid var(--accent-dim);
+    border-radius:var(--radius-sm);
+    padding:14px 16px;
+    font-size:.88rem;
+    line-height:1.5;
+    margin-bottom:18px;
+  }
+  .form-success.show{display:block;}
+  .form-success strong{color:var(--highlight);}
+  #contactForm.hide{display:none;}
+
+  .contact-map{
+    max-width:1100px;
+    margin:24px auto 0;
+    min-height:280px;
+    border-radius:12px;
+    overflow:hidden;
+    border:1px solid var(--border);
+  }
+  .contact-map iframe{width:100%;height:100%;min-height:280px;display:block;border:0;filter:grayscale(.4) invert(.92) contrast(.9);}
   @media(max-width:760px){
     .contact-wrap{grid-template-columns:1fr;}
+    .contact-form-wrap{border-left:0;border-top:1px solid var(--border);}
   }
 
   /* ---------- Footer ---------- */
@@ -778,11 +846,42 @@
         </div>
         <a href="tel:0612345678" class="btn btn-primary" style="margin-top:10px;">Bel nu</a>
       </div>
-      <div class="contact-map">
-        <iframe
-          src="https://www.openstreetmap.org/export/embed.html?bbox=4.5800%2C52.4450%2C4.6500%2C52.4850&layer=mapnik&marker=52.4650%2C4.6150"
-          loading="lazy" title="Locatie KRC Detailing — IJmuiden"></iframe>
+
+      <div class="contact-form-wrap">
+        <div id="formSuccess" class="form-success">
+          <strong>Bedankt!</strong> Uw aanvraag is verzonden — we nemen zo snel mogelijk contact met u op.
+        </div>
+        <form id="contactForm" action="https://formsubmit.co/info@krcdetailing.nl" method="POST">
+          <input type="hidden" name="_subject" value="Nieuwe aanvraag via krcdetailing.nl">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+
+          <div class="form-row">
+            <label for="f-naam">Naam</label>
+            <input type="text" id="f-naam" name="Naam" placeholder="Uw naam" required>
+          </div>
+          <div class="form-row">
+            <label for="f-email">E-mail</label>
+            <input type="email" id="f-email" name="E-mail" placeholder="naam@voorbeeld.nl" required>
+          </div>
+          <div class="form-row">
+            <label for="f-telefoon">Telefoon <span>(optioneel)</span></label>
+            <input type="tel" id="f-telefoon" name="Telefoon" placeholder="06 12345678">
+          </div>
+          <div class="form-row">
+            <label for="f-bericht">Bericht</label>
+            <textarea id="f-bericht" name="Bericht" rows="4" placeholder="Vertel ons over uw auto en de gewenste behandeling" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary form-submit">Aanvraag versturen</button>
+        </form>
       </div>
+    </div>
+
+    <div class="contact-map reveal">
+      <iframe
+        src="https://www.openstreetmap.org/export/embed.html?bbox=4.5800%2C52.4450%2C4.6500%2C52.4850&layer=mapnik&marker=52.4650%2C4.6150"
+        loading="lazy" title="Locatie KRC Detailing — IJmuiden"></iframe>
     </div>
   </section>
 
@@ -819,6 +918,41 @@
       toggle.setAttribute('aria-expanded', 'false');
     });
   });
+
+  // contact form — submit via FormSubmit's AJAX endpoint so we stay on-page
+  var contactForm = document.getElementById('contactForm');
+  var formSuccess = document.getElementById('formSuccess');
+  if(contactForm){
+    var submitBtn = contactForm.querySelector('.form-submit');
+    var errorNote = document.createElement('div');
+    errorNote.className = 'form-note error';
+    errorNote.style.display = 'none';
+    errorNote.textContent = 'Verzenden is niet gelukt. Bel ons gerust direct op 06 12345678, of probeer het nog eens.';
+    contactForm.appendChild(errorNote);
+
+    contactForm.addEventListener('submit', function(e){
+      e.preventDefault();
+      errorNote.style.display = 'none';
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Versturen…';
+
+      var action = contactForm.getAttribute('action').replace('formsubmit.co/', 'formsubmit.co/ajax/');
+      fetch(action, {
+        method: 'POST',
+        headers: {'Accept': 'application/json'},
+        body: new FormData(contactForm)
+      }).then(function(res){
+        if(!res.ok) throw new Error('bad status');
+        contactForm.classList.add('hide');
+        formSuccess.classList.add('show');
+        formSuccess.scrollIntoView({behavior:'smooth', block:'center'});
+      }).catch(function(){
+        errorNote.style.display = 'block';
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Aanvraag versturen';
+      });
+    });
+  }
 
   // active nav link on scroll
   var navLinks = Array.from(nav.querySelectorAll('a[href^="#"]'));
