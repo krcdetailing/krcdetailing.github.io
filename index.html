@@ -366,6 +366,40 @@
   .service-card:hover .service-icon{transform:scale(1.08) rotate(-4deg);}
   .service-card h3{font-size:1.15rem;font-weight:800;margin-bottom:10px;}
   .service-card p{color:var(--muted);font-size:.92rem;line-height:1.6;}
+  .service-card{position:relative;display:flex;flex-direction:column;}
+  .service-intro{color:var(--muted);font-size:.85rem;margin-bottom:14px;}
+  .service-features{margin-top:auto;padding-top:2px;}
+  .service-features li{
+    display:flex;
+    align-items:flex-start;
+    gap:9px;
+    color:var(--muted);
+    font-size:.88rem;
+    line-height:1.5;
+    margin-bottom:9px;
+  }
+  .service-features li:last-child{margin-bottom:0;}
+  .service-features li svg{
+    flex:0 0 auto;
+    width:16px;height:16px;
+    margin-top:2px;
+    color:var(--highlight);
+  }
+  .service-card.coming-soon{opacity:.75;}
+  .service-card.coming-soon:hover{transform:none;box-shadow:none;border-color:var(--border);}
+  .coming-soon-badge{
+    position:absolute;
+    top:20px;right:20px;
+    padding:5px 12px;
+    border-radius:20px;
+    font-size:.65rem;
+    font-weight:800;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    background:rgba(139,140,137,0.2);
+    color:var(--highlight-dim);
+    border:1px solid rgba(139,140,137,0.35);
+  }
 
   /* ---------- About / process ---------- */
   .about{
@@ -678,17 +712,17 @@
   <!-- HERO -->
   <section class="hero" id="top">
     <div class="hero-text">
-      <div class="hero-eyebrow">Premium Autodetailing · IJmuiden</div>
-      <h1>Van vuile weg<br>naar <em>showroom-glans.</em></h1>
-      <p>KRC Detailing brengt paintcorrection, keramische bescherming en een grondige interieurreiniging op dealerniveau naar IJmuiden. Met de hand afgewerkt, elk paneel, elke keer.</p>
+      <div class="hero-eyebrow">Autodetailing · IJmuiden</div>
+      <h1>Vakkundige verzorging, tot in het <em>kleinste detail.</em></h1>
+      <p>KRC Detailing verzorgt exterieur- en interieurreiniging voor particuliere en zakelijke klanten in IJmuiden en omgeving. Elke behandeling wordt met de hand uitgevoerd, volgens een vast protocol.</p>
       <div class="hero-actions">
-        <a href="#contact" class="btn btn-primary">Boek een behandeling</a>
+        <a href="#contact" class="btn btn-primary">Afspraak maken</a>
         <a href="#services" class="btn btn-outline">Bekijk diensten</a>
       </div>
       <div class="hero-stats">
-        <div><strong>100%</strong><span>Met de hand afgewerkt</span></div>
-        <div><strong>IJmuiden</strong><span>Gevestigd &amp; mobiel</span></div>
-        <div><strong>5★</strong><span>Zorg voor elke auto</span></div>
+        <div><strong>100%</strong><span>Handmatige afwerking</span></div>
+        <div><strong>IJmuiden</strong><span>Gevestigd</span></div>
+        <div><strong>5★</strong><span>Zorg per behandeling</span></div>
       </div>
     </div>
 
@@ -698,7 +732,7 @@
         <span class="label-tag">KRC Detailing</span>
       </div>
       <div class="car-platform"></div>
-      <div class="stage-caption"><b>Elke</b> auto krijgt de <b>showroom-behandeling</b></div>
+      <div class="stage-caption"><b>Consistente</b> kwaliteit, bij <b>elke behandeling.</b></div>
     </div>
 
     <a href="#services" class="scroll-cue" aria-label="Scroll naar diensten">
@@ -710,40 +744,45 @@
   <!-- SERVICES -->
   <section id="services">
     <div class="section-head reveal">
-      <div class="hero-eyebrow">Wat we doen</div>
-      <h2>Detailingpakketten voor elke auto</h2>
-      <p>Van een snelle opfrisbeurt tot volledige keramische bescherming: elke behandeling volledig met de hand afgewerkt.</p>
+      <div class="hero-eyebrow">Diensten</div>
+      <h2>Pakketten voor elke auto</h2>
+      <p>Drie niveaus van verzorging, elk volledig met de hand uitgevoerd volgens een vast protocol.</p>
     </div>
     <div class="services-grid">
       <div class="service-card reveal">
-        <div class="service-icon">✨</div>
-        <h3>Exterieurreiniging</h3>
-        <p>Handwas met twee emmers, decontaminatie, kleiband en sealant voor een diepe glans zonder swirls.</p>
+        <div class="service-icon">🧼</div>
+        <h3>Basis pakket</h3>
+        <ul class="service-features">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>Handwas (twee-emmermethode)</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>Velgen reinigen</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>Ramen in- en uitwendig</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>Bandenverzorging</li>
+        </ul>
       </div>
       <div class="service-card reveal">
         <div class="service-icon">🧴</div>
-        <h3>Interieur Diepreiniging</h3>
-        <p>Stoomreiniging, bekleding- en leerverzorging, geurverwijdering: elk oppervlak, elk kiertje, elke naad.</p>
+        <h3>Premium pakket</h3>
+        <p class="service-intro">Alles uit het Basis pakket, aangevuld met:</p>
+        <ul class="service-features">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>Interieur stofzuigen</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>Kunststof- en lederverzorging</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>Ramen grondig gereinigd</li>
+        </ul>
       </div>
       <div class="service-card reveal">
         <div class="service-icon">🛡️</div>
-        <h3>Keramische Coating</h3>
-        <p>Langdurige lakbescherming met een hydrofobe, glasachtige afwerking die vuil langer buiten houdt.</p>
+        <h3>Ultra pakket</h3>
+        <p class="service-intro">Alles uit het Premium pakket, aangevuld met:</p>
+        <ul class="service-features">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>Keramische coating / sealant</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>Langdurige lakbescherming</li>
+        </ul>
       </div>
-      <div class="service-card reveal">
+      <div class="service-card coming-soon reveal">
+        <span class="coming-soon-badge">Binnenkort beschikbaar</span>
         <div class="service-icon">🪞</div>
-        <h3>Paintcorrection</h3>
-        <p>Machinaal polijsten om swirls, krassen en oxidatie te verwijderen en de ware glans te herstellen.</p>
-      </div>
-      <div class="service-card reveal">
-        <div class="service-icon">🚘</div>
-        <h3>Velgen &amp; Banden</h3>
-        <p>Verwijdering van remstof, bandenverzorging en velgsealant zodat uw velgen langer schoon blijven.</p>
-      </div>
-      <div class="service-card reveal">
-        <div class="service-icon">📍</div>
-        <h3>Mobiele Service</h3>
-        <p>Gevestigd in IJmuiden, op aanvraag detailing bij u thuis of op kantoor in de regio.</p>
+        <h3>Polijsten</h3>
+        <p>Machinale paintcorrection om swirls, krassen en oxidatie te verwijderen en de ware glans te herstellen.</p>
       </div>
     </div>
   </section>
@@ -754,26 +793,26 @@
       <div class="about-media reveal">
         <div class="process-step">
           <div class="process-num">1</div>
-          <div><h4>Inspectie &amp; beoordeling</h4><p>We lopen samen met u de auto rond en noteren elk aandachtspunt.</p></div>
+          <div><h4>Intake &amp; pakketkeuze</h4><p>We bespreken de staat van uw auto en bepalen samen welk pakket het beste aansluit.</p></div>
         </div>
         <div class="process-step">
           <div class="process-num">2</div>
-          <div><h4>Decontaminatie</h4><p>Snow foam, handwas en kleiband verwijderen alles wat het oog niet ziet.</p></div>
+          <div><h4>Exterieur reiniging</h4><p>Handwas, velgen en banden worden grondig behandeld, onderdeel van elk pakket.</p></div>
         </div>
         <div class="process-step">
           <div class="process-num">3</div>
-          <div><h4>Correctie &amp; bescherming</h4><p>Machinaal polijsten met sealant of keramische coating verzegelt het resultaat.</p></div>
+          <div><h4>Interieur &amp; verzorging</h4><p>Bij Premium en Ultra volgt een grondige interieurbehandeling en kunststof- en lederverzorging.</p></div>
         </div>
         <div class="process-step">
           <div class="process-num">4</div>
-          <div><h4>Eindcontrole</h4><p>Elk paneel wordt in direct licht gecontroleerd voordat de auto terug naar u gaat.</p></div>
+          <div><h4>Afwerking &amp; controle</h4><p>Bij Ultra wordt een keramische coating aangebracht. Elke auto wordt afgesloten met een eindcontrole in direct licht.</p></div>
         </div>
       </div>
       <div class="about-text reveal">
-        <div class="hero-eyebrow">Waarom KRC Detailing</div>
-        <h2>Gebouwd op zorg, geen shortcuts</h2>
-        <p>KRC Detailing is een in IJmuiden gevestigde detailingservice die de klus goed wil doen: geen gehaaste wasbeurten, geen gedeelde waterbakken, geen concessies aan bescherming.</p>
-        <p>Elke auto krijgt een handmatige afwerking, premium producten en een eigenaar die de auto behandelt als zijn eigen, want we staan nog aan het begin en elk resultaat draagt onze naam.</p>
+        <div class="hero-eyebrow">Werkwijze</div>
+        <h2>Zorgvuldig, gestructureerd en transparant</h2>
+        <p>KRC Detailing is een in IJmuiden gevestigde detailingservice die volgens een vast protocol werkt, zodat elke behandeling dezelfde zorgvuldigheid en kwaliteit kent.</p>
+        <p>Elke auto wordt met de hand afgewerkt, met professionele producten en materialen, passend bij het gekozen pakket.</p>
         <a href="#contact" class="btn btn-primary">Neem contact op</a>
       </div>
     </div>
@@ -783,25 +822,25 @@
   <section id="gallery">
     <div class="section-head reveal">
       <div class="hero-eyebrow">Resultaten</div>
-      <h2>Dit is het niveau dat we nastreven</h2>
-      <p>Voorbeeldweergave van voor/na. De eerste echte klantfoto's volgen hier snel. Beweeg (of tik) over elke kaart.</p>
+      <h2>Het resultaat dat u mag verwachten</h2>
+      <p>Onderstaande voorbeelden geven een indicatie van het eindresultaat. Foto's van eigen klantwerk volgen binnenkort.</p>
     </div>
     <div class="gallery-grid">
       <div class="ba-card reveal">
-        <div class="ba-face dirty"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 17h14l-1.5-8.5A2 2 0 0 0 15.53 7H8.47a2 2 0 0 0-1.97 1.5L5 17zm2-2 1-6h8l1 6H7zM4 19h16v2H4z"/></svg>Voor: Vuil</div>
-        <div class="ba-face clean"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 5.6L19 9l-5.2 1.4L12 16l-1.8-5.6L5 9l5.2-1.4z"/></svg>Na: Showroom-schoon</div>
+        <div class="ba-face dirty"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 17h14l-1.5-8.5A2 2 0 0 0 15.53 7H8.47a2 2 0 0 0-1.97 1.5L5 17zm2-2 1-6h8l1 6H7zM4 19h16v2H4z"/></svg>Voor</div>
+        <div class="ba-face clean"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 5.6L19 9l-5.2 1.4L12 16l-1.8-5.6L5 9l5.2-1.4z"/></svg>Na</div>
       </div>
       <div class="ba-card reveal">
-        <div class="ba-face dirty"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 17h14l-1.5-8.5A2 2 0 0 0 15.53 7H8.47a2 2 0 0 0-1.97 1.5L5 17zm2-2 1-6h8l1 6H7zM4 19h16v2H4z"/></svg>Voor: Vuil</div>
-        <div class="ba-face clean"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 5.6L19 9l-5.2 1.4L12 16l-1.8-5.6L5 9l5.2-1.4z"/></svg>Na: Showroom-schoon</div>
+        <div class="ba-face dirty"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 17h14l-1.5-8.5A2 2 0 0 0 15.53 7H8.47a2 2 0 0 0-1.97 1.5L5 17zm2-2 1-6h8l1 6H7zM4 19h16v2H4z"/></svg>Voor</div>
+        <div class="ba-face clean"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 5.6L19 9l-5.2 1.4L12 16l-1.8-5.6L5 9l5.2-1.4z"/></svg>Na</div>
       </div>
       <div class="ba-card reveal">
-        <div class="ba-face dirty"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 17h14l-1.5-8.5A2 2 0 0 0 15.53 7H8.47a2 2 0 0 0-1.97 1.5L5 17zm2-2 1-6h8l1 6H7zM4 19h16v2H4z"/></svg>Voor: Vuil</div>
-        <div class="ba-face clean"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 5.6L19 9l-5.2 1.4L12 16l-1.8-5.6L5 9l5.2-1.4z"/></svg>Na: Showroom-schoon</div>
+        <div class="ba-face dirty"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 17h14l-1.5-8.5A2 2 0 0 0 15.53 7H8.47a2 2 0 0 0-1.97 1.5L5 17zm2-2 1-6h8l1 6H7zM4 19h16v2H4z"/></svg>Voor</div>
+        <div class="ba-face clean"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 5.6L19 9l-5.2 1.4L12 16l-1.8-5.6L5 9l5.2-1.4z"/></svg>Na</div>
       </div>
       <div class="ba-card reveal">
-        <div class="ba-face dirty"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 17h14l-1.5-8.5A2 2 0 0 0 15.53 7H8.47a2 2 0 0 0-1.97 1.5L5 17zm2-2 1-6h8l1 6H7zM4 19h16v2H4z"/></svg>Voor: Vuil</div>
-        <div class="ba-face clean"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 5.6L19 9l-5.2 1.4L12 16l-1.8-5.6L5 9l5.2-1.4z"/></svg>Na: Showroom-schoon</div>
+        <div class="ba-face dirty"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 17h14l-1.5-8.5A2 2 0 0 0 15.53 7H8.47a2 2 0 0 0-1.97 1.5L5 17zm2-2 1-6h8l1 6H7zM4 19h16v2H4z"/></svg>Voor</div>
+        <div class="ba-face clean"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 5.6L19 9l-5.2 1.4L12 16l-1.8-5.6L5 9l5.2-1.4z"/></svg>Na</div>
       </div>
     </div>
   </section>
@@ -886,12 +925,9 @@
             <label for="f-pakket">Gewenst pakket</label>
             <select id="f-pakket" name="Gewenst pakket" required>
               <option value="" disabled selected>Kies een pakket…</option>
-              <option value="Exterieurreiniging">Exterieurreiniging</option>
-              <option value="Interieur Diepreiniging">Interieur Diepreiniging</option>
-              <option value="Keramische Coating">Keramische Coating</option>
-              <option value="Paintcorrection">Paintcorrection</option>
-              <option value="Velgen & Banden">Velgen & Banden</option>
-              <option value="Mobiele Service">Mobiele Service</option>
+              <option value="Basis pakket">Basis pakket</option>
+              <option value="Premium pakket">Premium pakket</option>
+              <option value="Ultra pakket">Ultra pakket</option>
               <option value="Weet ik nog niet, graag advies">Weet ik nog niet, graag advies</option>
             </select>
           </div>
