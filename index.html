@@ -366,6 +366,40 @@
   .service-card:hover .service-icon{transform:scale(1.08) rotate(-4deg);}
   .service-card h3{font-size:1.15rem;font-weight:800;margin-bottom:10px;}
   .service-card p{color:var(--muted);font-size:.92rem;line-height:1.6;}
+  .service-card{position:relative;display:flex;flex-direction:column;}
+  .service-intro{color:var(--muted);font-size:.85rem;margin-bottom:14px;}
+  .service-features{margin-top:auto;padding-top:2px;}
+  .service-features li{
+    display:flex;
+    align-items:flex-start;
+    gap:9px;
+    color:var(--muted);
+    font-size:.88rem;
+    line-height:1.5;
+    margin-bottom:9px;
+  }
+  .service-features li:last-child{margin-bottom:0;}
+  .service-features li svg{
+    flex:0 0 auto;
+    width:16px;height:16px;
+    margin-top:2px;
+    color:var(--highlight);
+  }
+  .service-card.coming-soon{opacity:.75;}
+  .service-card.coming-soon:hover{transform:none;box-shadow:none;border-color:var(--border);}
+  .coming-soon-badge{
+    position:absolute;
+    top:20px;right:20px;
+    padding:5px 12px;
+    border-radius:20px;
+    font-size:.65rem;
+    font-weight:800;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    background:rgba(139,140,137,0.2);
+    color:var(--highlight-dim);
+    border:1px solid rgba(139,140,137,0.35);
+  }
 
   /* ---------- About / process ---------- */
   .about{
@@ -710,40 +744,45 @@
   <!-- SERVICES -->
   <section id="services">
     <div class="section-head reveal">
-      <div class="hero-eyebrow">Wat we doen</div>
-      <h2>Detailingpakketten voor elke auto</h2>
-      <p>Van een snelle opfrisbeurt tot volledige keramische bescherming: elke behandeling volledig met de hand afgewerkt.</p>
+      <div class="hero-eyebrow">Diensten</div>
+      <h2>Pakketten voor elke auto</h2>
+      <p>Drie niveaus van verzorging, elk volledig met de hand uitgevoerd volgens een vast protocol.</p>
     </div>
     <div class="services-grid">
       <div class="service-card reveal">
-        <div class="service-icon">✨</div>
-        <h3>Exterieurreiniging</h3>
-        <p>Handwas met twee emmers, decontaminatie, kleiband en sealant voor een diepe glans zonder swirls.</p>
+        <div class="service-icon">🧼</div>
+        <h3>Basis pakket</h3>
+        <ul class="service-features">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>Handwas (twee-emmermethode)</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>Velgen reinigen</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>Ramen in- en uitwendig</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>Bandenverzorging</li>
+        </ul>
       </div>
       <div class="service-card reveal">
         <div class="service-icon">🧴</div>
-        <h3>Interieur Diepreiniging</h3>
-        <p>Stoomreiniging, bekleding- en leerverzorging, geurverwijdering: elk oppervlak, elk kiertje, elke naad.</p>
+        <h3>Premium pakket</h3>
+        <p class="service-intro">Alles uit het Basis pakket, aangevuld met:</p>
+        <ul class="service-features">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>Interieur stofzuigen</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>Kunststof- en lederverzorging</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>Ramen grondig gereinigd</li>
+        </ul>
       </div>
       <div class="service-card reveal">
         <div class="service-icon">🛡️</div>
-        <h3>Keramische Coating</h3>
-        <p>Langdurige lakbescherming met een hydrofobe, glasachtige afwerking die vuil langer buiten houdt.</p>
+        <h3>Ultra pakket</h3>
+        <p class="service-intro">Alles uit het Premium pakket, aangevuld met:</p>
+        <ul class="service-features">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>Keramische coating / sealant</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>Langdurige lakbescherming</li>
+        </ul>
       </div>
-      <div class="service-card reveal">
+      <div class="service-card coming-soon reveal">
+        <span class="coming-soon-badge">Binnenkort beschikbaar</span>
         <div class="service-icon">🪞</div>
-        <h3>Paintcorrection</h3>
-        <p>Machinaal polijsten om swirls, krassen en oxidatie te verwijderen en de ware glans te herstellen.</p>
-      </div>
-      <div class="service-card reveal">
-        <div class="service-icon">🚘</div>
-        <h3>Velgen &amp; Banden</h3>
-        <p>Verwijdering van remstof, bandenverzorging en velgsealant zodat uw velgen langer schoon blijven.</p>
-      </div>
-      <div class="service-card reveal">
-        <div class="service-icon">📍</div>
-        <h3>Mobiele Service</h3>
-        <p>Gevestigd in IJmuiden, op aanvraag detailing bij u thuis of op kantoor in de regio.</p>
+        <h3>Polijsten</h3>
+        <p>Machinale paintcorrection om swirls, krassen en oxidatie te verwijderen en de ware glans te herstellen.</p>
       </div>
     </div>
   </section>
@@ -886,12 +925,9 @@
             <label for="f-pakket">Gewenst pakket</label>
             <select id="f-pakket" name="Gewenst pakket" required>
               <option value="" disabled selected>Kies een pakket…</option>
-              <option value="Exterieurreiniging">Exterieurreiniging</option>
-              <option value="Interieur Diepreiniging">Interieur Diepreiniging</option>
-              <option value="Keramische Coating">Keramische Coating</option>
-              <option value="Paintcorrection">Paintcorrection</option>
-              <option value="Velgen & Banden">Velgen & Banden</option>
-              <option value="Mobiele Service">Mobiele Service</option>
+              <option value="Basis pakket">Basis pakket</option>
+              <option value="Premium pakket">Premium pakket</option>
+              <option value="Ultra pakket">Ultra pakket</option>
               <option value="Weet ik nog niet, graag advies">Weet ik nog niet, graag advies</option>
             </select>
           </div>
